@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Game — Drago Predictor</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  display:flex;flex-direction:column;
+  background:#0f0f1a;
+  font-family:'Montserrat',sans-serif;
+}
+
+/* ── Hero header bar ── */
+.hero-bar{
+  flex-shrink:0;
+  width:100%;
+  background:linear-gradient(135deg,#1a1a3e 0%,#2a1f6e 100%);
+  padding:10px 14px 10px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid rgba(124,92,252,.25);
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+  animation:slideDown .35s cubic-bezier(.22,1,.36,1) both;
+  z-index:100;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
+
+.back-btn{
+  width:38px;height:38px;flex-shrink:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background .18s,transform .18s cubic-bezier(.34,1.56,.64,1);
+  -webkit-tap-highlight-color:transparent;
+}
+.back-btn:active{transform:scale(.88);background:rgba(255,255,255,.18)}
+.back-btn i{font-size:15px;color:#fff}
+
+.hero-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.hero-title{
+  font-size:16px;font-weight:900;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:.2px;
+}
+.hero-sub{font-size:10px;font-weight:700;color:rgba(180,160,255,.8);text-transform:uppercase;letter-spacing:.5px}
+
+.hero-logo{
+  width:36px;height:36px;border-radius:10px;
+  object-fit:contain;flex-shrink:0;
+  box-shadow:0 3px 10px rgba(0,0,0,.3);
+  background:#fff;padding:2px;
+}
+
+.open-tab-btn{
+  flex-shrink:0;
+  width:36px;height:36px;
+  border-radius:50%;border:none;
+  background:rgba(255,255,255,.15);
+  border:1.5px solid rgba(255,255,255,.25);
+  color:#fff;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s,transform .18s cubic-bezier(.34,1.56,.64,1);
+  -webkit-tap-highlight-color:transparent;
+}
+.open-tab-btn:active{transform:scale(.88);background:rgba(255,255,255,.25)}
+.open-tab-btn i{font-size:14px}
+
+/* ── iframe wrapper fills remaining height ── */
+.frame-wrap{
+  flex:1;
+  position:relative;
+  overflow:hidden;
+  background:#0f0f1a;
+  animation:fadeIn .4s .2s ease both;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+#gameFrame{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:none;
+  background:#fff;
+}
+
+/* ── Fallback overlay (shown if iframe blocked) ── */
+.fallback{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:30px;
+  animation:fadeIn .3s ease both;
+}
+.fallback.show{display:flex}
+.fallback-icon{font-size:52px;margin-bottom:16px;opacity:.6}
+.fallback-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:8px}
+.fallback-desc{font-size:13px;color:rgba(200,200,255,.6);max-width:300px;line-height:1.6;margin-bottom:24px}
+.fallback-btn{
+  padding:15px 32px;border-radius:16px;border:none;
+  background:linear-gradient(135deg,#7C5CFC,#5B6AF0);
+  color:#fff;font-family:'Montserrat',sans-serif;
+  font-size:15px;font-weight:900;letter-spacing:.4px;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(124,92,252,.45);
+  display:flex;align-items:center;gap:10px;
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1);
+  -webkit-tap-highlight-color:transparent;
+  text-decoration:none;
+}
+.fallback-btn:active{transform:scale(.96)}
+.fallback-btn i{font-size:17px}
+
+/* ── Loading spinner ── */
+.frame-loader{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  z-index:10;
+  transition:opacity .3s;
+}
+.frame-loader.hide{opacity:0;pointer-events:none}
+.spinner{
+  width:44px;height:44px;
+  border:4px solid rgba(124,92,252,.2);
+  border-top-color:#7C5CFC;
+  border-radius:50%;animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{font-size:12px;font-weight:700;color:rgba(200,200,255,.5);letter-spacing:.5px;text-transform:uppercase}
+
+/* ── Auth loading overlay ── */
+#authOverlay{
+  position:fixed;inset:0;
+  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  display:flex;align-items:center;justify-content:center;
+  z-index:999;transition:opacity .3s;
+}
+
+/* ── Status overlays ── */
+.full-ov{display:none;position:fixed;inset:0;z-index:3000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:linear-gradient(180deg,#1a1a3e,#0f0f1a)}
+.full-ov.show{display:flex}
+.ov-icon{font-size:54px;margin-bottom:14px;opacity:.8}
+.ov-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:10px}
+.ov-desc{font-size:14px;color:rgba(200,200,255,.6);max-width:300px;line-height:1.6;margin-bottom:20px}
+.ov-link{display:inline-block;background:linear-gradient(135deg,#7C3AED,#5B6AF0);color:#fff;text-decoration:none;padding:12px 24px;border-radius:12px;font-weight:800;font-size:14px}
+</style>
+</head>
+<body>
+
+<!-- Auth loading -->
+<div id="authOverlay"><div class="spinner"></div></div>
+
+<!-- Status overlays -->
+<div class="full-ov" id="ovBanned">
+  <div class="ov-icon">&#128683;</div>
+  <div class="ov-title">Account Banned</div>
+  <div class="ov-desc">Aapka account permanently ban kar diya gaya hai.</div>
+  <a href="https://t.me/xx_drago" target="_blank" class="ov-link">Contact Support</a>
+</div>
+<div class="full-ov" id="ovBlocked">
+  <div class="ov-icon">&#9940;</div>
+  <div class="ov-title">Account Blocked</div>
+  <div class="ov-desc">Aapka account block kar diya gaya hai. Support se contact karo.</div>
+  <a href="https://t.me/xx_drago" target="_blank" class="ov-link">Contact Support</a>
+</div>
+<div class="full-ov" id="ovPaused">
+  <div class="ov-icon">&#9208;</div>
+  <div class="ov-title">Account Paused</div>
+  <div class="ov-desc">Aapka account temporarily pause hai.</div>
+  <a href="https://t.me/xx_drago" target="_blank" class="ov-link">Contact Support</a>
+</div>
+<div class="full-ov" id="ovExpired">
+  <div class="ov-icon">&#9203;</div>
+  <div class="ov-title">Subscription Expired</div>
+  <div class="ov-desc">Aapka plan expire ho gaya hai. Naya plan lo.</div>
+  <a href="/payment" class="ov-link">Select Plan</a>
+</div>
+<div class="full-ov" id="ovNoLink">
+  <div class="ov-icon">&#128279;</div>
+  <div class="ov-title">Link Not Found</div>
+  <div class="ov-desc">Is game ka link available nahi hai. Wapas jao.</div>
+  <a href="/game" class="ov-link">Back to Games</a>
+</div>
+
+<!-- ── Hero header bar ── -->
+<div class="hero-bar">
+  <button class="back-btn" id="backBtn" aria-label="Back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </button>
+  <div class="hero-info">
+    <span class="hero-title" id="heroTitle">Game</span>
+    <span class="hero-sub">Drago Predictor</span>
+  </div>
+  <button class="open-tab-btn" id="openTabBtn" title="Open in new tab" aria-label="Open in new tab">
+    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+  </button>
+  <img src="https://i.ibb.co/Cp6rPPxp/20260218-115056.png" alt="Drago" class="hero-logo">
+</div>
+
+<!-- ── iframe / content area ── -->
+<div class="frame-wrap">
+  <!-- Loading indicator -->
+  <div class="frame-loader" id="frameLoader">
+    <div class="spinner"></div>
+    <span class="loader-text">Loading Game...</span>
+  </div>
+
+  <!-- Actual iframe -->
+  <iframe
+    id="gameFrame"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+    allow="accelerometer; autoplay; clipboard-read; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+
+  <!-- Fallback if iframe blocked -->
+  <div class="fallback" id="fallback">
+    <div class="fallback-icon">&#127918;</div>
+    <div class="fallback-title" id="fbTitle">Game</div>
+    <div class="fallback-desc">Yeh platform direct open nahi ho sakta. Naye tab mein kholo.</div>
+    <a class="fallback-btn" id="fbBtn" href="#" target="_blank" rel="noopener noreferrer">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      Open Game
+    </a>
+  </div>
+</div>
+
+<script>
+const API = "https://flask-hello-world-nu-sooty-63.vercel.app";
+let pollTmr = null;
+let gameLink = "";
+
+function ud(){ try{ return JSON.parse(localStorage.getItem("_ud")||"null"); }catch(e){ return null; } }
+function auth(){
+  const u=ud(); if(!u||!u.uid||!u.session_signature) return null;
+  return {uid:u.uid,session_signature:u.session_signature};
+}
+function goLogin(){ localStorage.removeItem("_ud"); window.location.replace("/"); }
+
+async function apiFetch(path,body){
+  const r=await fetch(API+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){ const e=new Error(d.detail||"Error "+r.status); e.status=r.status; e.detail=d.detail||""; throw e; }
+  return d;
+}
+async function withRefresh(cb){
+  try{ return await cb(); }
+  catch(e){
+    if(e.status===403 && e.detail==="session_expired"){
+      const a=auth(); if(!a){ goLogin(); return; }
+      try{
+        const d=await apiFetch("/api/refresh-session",a);
+        if(d.session_signature){ const u=ud(); u.session_signature=d.session_signature; localStorage.setItem("_ud",JSON.stringify(u)); }
+        return await cb();
+      }catch(e2){ if(e2.status===403){ goLogin(); return; } throw e2; }
+    }
+    throw e;
+  }
+}
+
+function hideOvs(){ ["ovBanned","ovBlocked","ovPaused","ovExpired","ovNoLink"].forEach(id=>document.getElementById(id).classList.remove("show")); }
+function handleStatus(as,ss){
+  if(as==="banned") { stopPoll(); hideOvs(); document.getElementById("ovBanned").classList.add("show");  return false; }
+  if(as==="blocked"){ stopPoll(); hideOvs(); document.getElementById("ovBlocked").classList.add("show"); return false; }
+  if(as==="paused") { stopPoll(); hideOvs(); document.getElementById("ovPaused").classList.add("show");  return false; }
+  if(ss!=="active"&&ss!=="free"){ stopPoll(); hideOvs(); document.getElementById("ovExpired").classList.add("show"); return false; }
+  hideOvs(); return true;
+}
+
+function startPoll(){ if(pollTmr) return; pollTmr=setInterval(doPoll,15000); }
+function stopPoll(){ if(pollTmr){ clearInterval(pollTmr); pollTmr=null; } }
+async function doPoll(){
+  const a=auth(); if(!a) return;
+  try{
+    const d=await withRefresh(()=>apiFetch("/api/account-status",a));
+    handleStatus(d.account_status,d.subscription_status);
+  }catch(e){}
+}
+
+function hideAuthOverlay(){ const l=document.getElementById("authOverlay"); l.style.opacity="0"; setTimeout(()=>l.style.display="none",300); }
+
+function loadFrame(url){
+  const frame  = document.getElementById("gameFrame");
+  const loader = document.getElementById("frameLoader");
+  const fb     = document.getElementById("fallback");
+
+  // Wire iframe events
+  let loadTimer = setTimeout(()=>{
+    // If iframe hasn't loaded in 8s, assume blocked → show fallback
+    frame.style.display = "none";
+    fb.classList.add("show");
+    loader.classList.add("hide");
+  }, 8000);
+
+  frame.onload = ()=>{
+    clearTimeout(loadTimer);
+    loader.classList.add("hide");
+    // Check if iframe content is accessible (same-origin) or blocked
+    try{
+      // This throws if cross-origin content was blocked
+      void frame.contentWindow.location.href;
+    }catch(e){
+      // Cross-origin — iframe loaded but we can't detect block via JS
+      // Just hide loader; content should be visible
+    }
+  };
+  frame.onerror = ()=>{
+    clearTimeout(loadTimer);
+    frame.style.display = "none";
+    fb.classList.add("show");
+    loader.classList.add("hide");
+  };
+
+  frame.src = url;
+}
+
+async function init(){
+  const a = auth(); if(!a){ goLogin(); return; }
+
+  const params   = new URLSearchParams(window.location.search);
+  const gameName = params.get("name")||"Game";
+  gameLink       = params.get("link")||"";
+
+  // Update titles
+  document.getElementById("heroTitle").textContent  = gameName;
+  document.getElementById("fbTitle").textContent    = gameName;
+  document.title = gameName + " — Drago Predictor";
+
+  // Back button
+  document.getElementById("backBtn").addEventListener("click",()=>{
+    window.history.length > 1 ? window.history.back() : window.location.href = "/game";
+  });
+
+  // Open in new tab button
+  document.getElementById("openTabBtn").addEventListener("click",()=>{
+    if(gameLink) window.open(gameLink,"_blank","noopener,noreferrer");
+  });
+
+  // Fallback open button
+  if(gameLink){
+    document.getElementById("fbBtn").href = gameLink;
+  }
+
+  if(!gameLink){
+    hideAuthOverlay();
+    document.getElementById("ovNoLink").classList.add("show");
+    return;
+  }
+
+  // Auth check
+  try{
+    const d = await withRefresh(()=>apiFetch("/api/account-status",a));
+    if(!handleStatus(d.account_status||"active", d.subscription_status||"none")){ hideAuthOverlay(); return; }
+    startPoll();
+  }catch(e){ startPoll(); }
+
+  hideAuthOverlay();
+  loadFrame(gameLink);
+}
+
+init();
+</script>
+</body>
+</html>
