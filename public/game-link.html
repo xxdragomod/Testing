@@ -54,7 +54,7 @@ body{
 .back-btn i{font-size:15px;color:#7C5CFC}
 
 .hero-logo{
-  width:38px;height:38px;flex-shrink:0;border-radius:12px;object-fit:contain;
+  width:48px;height:48px;flex-shrink:0;border-radius:12px;object-fit:contain;
   background:transparent;
 }
 .hero-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
@@ -173,7 +173,7 @@ body{
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   border:1.5px solid rgba(255,255,255,0.95);
-  box-shadow:0 10px 34px rgba(91,106,240,.22), 0 2px 8px rgba(0,0,0,.06);
+  box-shadow:0 8px 28px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);
   padding:9px 12px;
   gap:8px;
 }
@@ -286,6 +286,15 @@ body{
 }
 .slide-panel.show{
   transform:translateY(0);
+}
+.panel-tag{
+  position:absolute;
+  top:16px;right:18px;
+  background:linear-gradient(135deg,#7C5CFC,#5B6AF0);
+  color:#fff;
+  font-size:11px;font-weight:900;letter-spacing:1px;
+  padding:6px 14px;border-radius:20px;
+  box-shadow:0 4px 12px rgba(124,92,252,.3);
 }
 
 .panel-handle{
@@ -438,6 +447,7 @@ body{
 <!-- HACK PANEL -->
 <div class="slide-panel" id="hackPanel">
   <div class="panel-handle"></div>
+  <div class="panel-tag">HACK</div>
   <div class="panel-content">
     <!-- Yahan apna Hack content daalo -->
     <div class="panel-empty">Hack content yahan aayega</div>
@@ -447,6 +457,7 @@ body{
 <!-- SETTINGS PANEL -->
 <div class="slide-panel" id="settingPanel">
   <div class="panel-handle"></div>
+  <div class="panel-tag">SETTING</div>
   <div class="panel-content">
     <!-- Yahan apna Settings content daalo -->
     <div class="panel-empty">Settings content yahan aayega</div>
