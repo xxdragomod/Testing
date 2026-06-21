@@ -55,7 +55,7 @@ body{
 
 .hero-logo{
   width:38px;height:38px;flex-shrink:0;border-radius:12px;object-fit:contain;
-  background:#fff;padding:3px;box-shadow:0 4px 12px rgba(124,92,252,.12);
+  background:transparent;
 }
 .hero-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .hero-sub{
@@ -194,7 +194,7 @@ body{
   border:none;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
-  box-shadow:0 4px 16px rgba(124,92,252,.45);
+  box-shadow:none;
   transition:transform .22s cubic-bezier(.34,1.56,.64,1), background .2s;
   -webkit-tap-highlight-color:transparent;
   position:relative;
@@ -432,19 +432,12 @@ body{
 
 <!-- ════════════════════════════════════════
      PANEL OVERLAY (dim background)
-════════════════════════════════════════ -->
+���═══════════════════════════════════════ -->
 <div class="panel-overlay" id="panelOverlay"></div>
 
 <!-- HACK PANEL -->
 <div class="slide-panel" id="hackPanel">
   <div class="panel-handle"></div>
-  <div class="panel-header">
-    <div class="panel-header-icon hack"><i class="fa-solid fa-bolt"></i></div>
-    <div>
-      <div class="panel-title">Hack</div>
-      <div class="panel-subtitle">Prediction Tools</div>
-    </div>
-  </div>
   <div class="panel-content">
     <!-- Yahan apna Hack content daalo -->
     <div class="panel-empty">Hack content yahan aayega</div>
@@ -454,13 +447,6 @@ body{
 <!-- SETTINGS PANEL -->
 <div class="slide-panel" id="settingPanel">
   <div class="panel-handle"></div>
-  <div class="panel-header">
-    <div class="panel-header-icon setting"><i class="fa-solid fa-gear"></i></div>
-    <div>
-      <div class="panel-title">Settings</div>
-      <div class="panel-subtitle">App Preferences</div>
-    </div>
-  </div>
   <div class="panel-content">
     <!-- Yahan apna Settings content daalo -->
     <div class="panel-empty">Settings content yahan aayega</div>
