@@ -8,50 +8,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
+/* ── Page view transitions (same as home.html / game.html) ── */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vtOut .22s cubic-bezier(.4,0,.2,1) both}
+::view-transition-new(root){animation:vtIn .26s cubic-bezier(.22,1,.36,1) both}
+@keyframes vtOut{to{opacity:0;transform:translateY(-8px)}}
+@keyframes vtIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
 html,body{height:100%;overflow:hidden}
 body{
   display:flex;flex-direction:column;
-  background:#0f0f1a;
+  background:linear-gradient(180deg,#c3caff 0%,#e2e5ff 40%,#ffffff 100%);
   font-family:'Montserrat',sans-serif;
 }
 
-/* ── Hero header bar ── */
+/* ── Header bar — light app theme (frosted white pill-style) ── */
 .hero-bar{
   flex-shrink:0;
   width:100%;
-  background:linear-gradient(180deg,#d7dbff 0%,#c6ccfa 100%);
-  padding:4px 14px 4px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  padding:10px 16px;
   display:flex;align-items:center;gap:12px;
-  border-bottom:1px solid rgba(124,92,252,.15);
-  box-shadow:0 4px 20px rgba(0,0,0,.15);
-  animation:slideDown .35s cubic-bezier(.22,1,.36,1) both;
+  border-bottom:1.5px solid rgba(255,255,255,0.95);
+  box-shadow:0 8px 28px rgba(100,80,220,.15);
+  animation:slideDown .4s cubic-bezier(.22,1,.36,1) both;
   z-index:100;
 }
 @keyframes slideDown{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
 
 .back-btn{
-  width:38px;height:38px;flex-shrink:0;
+  width:40px;height:40px;flex-shrink:0;
   border-radius:50%;
-  background:rgba(255,255,255,.6);
-  border:1.5px solid rgba(124,92,252,.3);
+  background:#fff;
+  border:1.5px solid #eef0ff;
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
+  box-shadow:0 4px 12px rgba(124,92,252,.12);
   transition:background .18s,transform .18s cubic-bezier(.34,1.56,.64,1);
   -webkit-tap-highlight-color:transparent;
 }
-.back-btn:active{transform:scale(.88);background:rgba(255,255,255,.85)}
-.back-btn i{font-size:15px;color:#4a3fa0}
+.back-btn:active{transform:scale(.88);background:#f4f4ff}
+.back-btn i{font-size:15px;color:#7C5CFC}
 
+.hero-logo{
+  width:38px;height:38px;flex-shrink:0;border-radius:12px;object-fit:contain;
+  background:#fff;padding:3px;box-shadow:0 4px 12px rgba(124,92,252,.12);
+}
 .hero-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .hero-sub{
-  font-size:16px;font-weight:900;color:#3a3080;
+  font-size:16px;font-weight:900;color:#1a1a2e;
   text-transform:uppercase;letter-spacing:.4px;line-height:1.1;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .hero-title{
-  font-size:12px;font-weight:700;color:#6a5cf0;
+  font-size:11px;font-weight:800;color:#7C5CFC;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  letter-spacing:.3px;text-transform:uppercase;
+  letter-spacing:.4px;text-transform:uppercase;
 }
 
 /* ── iframe wrapper fills remaining height ── */
@@ -59,8 +74,8 @@ body{
   flex:1;
   position:relative;
   overflow:hidden;
-  background:#0f0f1a;
-  animation:fadeIn .4s .2s ease both;
+  background:#fff;
+  animation:fadeIn .45s .15s ease both;
 }
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
@@ -71,18 +86,18 @@ body{
   background:#fff;
 }
 
-/* ── Fallback overlay ── */
+/* ── Fallback overlay (light theme) ── */
 .fallback{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  background:linear-gradient(180deg,#c3caff,#e2e5ff 40%,#fff);
   display:none;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:30px;
   animation:fadeIn .3s ease both;
 }
 .fallback.show{display:flex}
-.fallback-icon{font-size:52px;margin-bottom:16px;opacity:.6}
-.fallback-title{font-size:20px;font-weight:900;color:#fff;margin-bottom:8px}
-.fallback-desc{font-size:13px;color:rgba(200,200,255,.6);max-width:300px;line-height:1.6;margin-bottom:24px}
+.fallback-icon{font-size:52px;margin-bottom:16px;color:#7C5CFC;opacity:.7}
+.fallback-title{font-size:20px;font-weight:900;color:#1E293B;margin-bottom:8px}
+.fallback-desc{font-size:13px;color:#6b7280;max-width:300px;line-height:1.6;margin-bottom:24px}
 .fallback-btn{
   padding:15px 32px;border-radius:16px;border:none;
   background:linear-gradient(135deg,#7C5CFC,#5B6AF0);
@@ -98,10 +113,10 @@ body{
 .fallback-btn:active{transform:scale(.96)}
 .fallback-btn i{font-size:17px}
 
-/* ── Loading spinner ── */
+/* ── Loading spinner (light theme) ── */
 .frame-loader{
   position:absolute;inset:0;
-  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  background:linear-gradient(180deg,#c3caff,#e2e5ff 40%,#fff);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   z-index:10;
   transition:opacity .3s;
@@ -114,26 +129,26 @@ body{
   border-radius:50%;animation:spin .8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.loader-text{font-size:12px;font-weight:700;color:rgba(200,200,255,.5);letter-spacing:.5px;text-transform:uppercase}
+.loader-text{font-size:12px;font-weight:800;color:#9ca3af;letter-spacing:.5px;text-transform:uppercase}
 
-/* ── Auth loading overlay ── */
+/* ── Auth loading overlay (light theme) ── */
 #authOverlay{
   position:fixed;inset:0;
-  background:linear-gradient(180deg,#1a1a3e,#0f0f1a);
+  background:linear-gradient(180deg,#c3caff,#e2e5ff 40%,#fff);
   display:flex;align-items:center;justify-content:center;
   z-index:999;transition:opacity .3s;
 }
 
-/* ── Status overlays ── */
-.full-ov{display:none;position:fixed;inset:0;z-index:3000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:linear-gradient(180deg,#1a1a3e,#0f0f1a)}
-.full-ov.show{display:flex}
-.ov-icon{font-size:54px;margin-bottom:14px;opacity:.8}
-.ov-title{font-size:22px;font-weight:900;color:#fff;margin-bottom:10px}
-.ov-desc{font-size:14px;color:rgba(200,200,255,.6);max-width:300px;line-height:1.6;margin-bottom:20px}
-.ov-link{display:inline-block;background:linear-gradient(135deg,#7C3AED,#5B6AF0);color:#fff;text-decoration:none;padding:12px 24px;border-radius:12px;font-weight:800;font-size:14px}
+/* ── Status overlays (light theme, same as app) ── */
+.full-ov{display:none;position:fixed;inset:0;z-index:3000;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;background:linear-gradient(180deg,#c3caff,#e2e5ff 40%,#fff)}
+.full-ov.show{display:flex;animation:fadeIn .3s ease both}
+.ov-icon{font-size:54px;margin-bottom:14px}
+.ov-title{font-size:22px;font-weight:900;color:#1E293B;margin-bottom:10px}
+.ov-desc{font-size:14px;color:#6b7280;max-width:300px;line-height:1.6;margin-bottom:20px}
+.ov-link{display:inline-block;background:linear-gradient(135deg,#7C3AED,#5B6AF0);color:#fff;text-decoration:none;padding:12px 24px;border-radius:12px;font-weight:800;font-size:14px;box-shadow:0 8px 24px rgba(124,92,252,.35)}
 
 /* ════════════════════════════════════════
-   BOTTOM NAV BAR — pill style (image jaisa)
+   BOTTOM NAV BAR — pill style
 ════════════════════════════════════════ */
 .fab-container{
   position:fixed;
@@ -149,10 +164,15 @@ body{
   box-shadow:none;
   padding:0;
   gap:0;
+  animation:navSlideUp .45s .15s cubic-bezier(.22,1,.36,1) both;
   transition:background .35s ease, box-shadow .35s ease, padding .35s cubic-bezier(.22,1,.36,1), gap .35s cubic-bezier(.22,1,.36,1);
 }
+@keyframes navSlideUp{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .fab-container.open{
-  background:#fff;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1.5px solid rgba(255,255,255,0.95);
   box-shadow:0 10px 34px rgba(91,106,240,.22), 0 2px 8px rgba(0,0,0,.06);
   padding:9px 12px;
   gap:8px;
@@ -232,11 +252,13 @@ body{
 .fab-side-btn:active{transform:scale(.92) !important}
 
 /* ════════════════════════════════════════
-   SLIDE-UP PANEL (Hack / Settings)
+   SLIDE-UP PANEL (Hack / Settings) — light theme
 ════════════════════════════════════════ */
 .panel-overlay{
   position:fixed;inset:0;
-  background:rgba(0,0,0,.5);
+  background:rgba(30,30,60,.35);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
   z-index:400;
   opacity:0;
   pointer-events:none;
@@ -251,15 +273,16 @@ body{
   position:fixed;
   bottom:0;left:0;right:0;
   z-index:450;
-  background:linear-gradient(180deg,#1a1a3e 0%,#0f0f1a 100%);
+  background:#fff;
   border-radius:24px 24px 0 0;
-  border-top:1px solid rgba(124,92,252,.3);
+  border-top:1.5px solid #eef0ff;
   padding:20px 20px 40px;
   transform:translateY(100%);
   transition:transform .38s cubic-bezier(.22,1,.36,1);
   height:70vh;
   max-height:70vh;
   overflow-y:auto;
+  box-shadow:0 -12px 40px rgba(100,80,220,.18);
 }
 .slide-panel.show{
   transform:translateY(0);
@@ -267,7 +290,7 @@ body{
 
 .panel-handle{
   width:40px;height:4px;
-  background:rgba(255,255,255,.2);
+  background:#e2e5ff;
   border-radius:2px;
   margin:0 auto 18px;
 }
@@ -275,7 +298,7 @@ body{
   display:flex;align-items:center;gap:10px;
   margin-bottom:20px;
   padding-bottom:14px;
-  border-bottom:1px solid rgba(124,92,252,.2);
+  border-bottom:1.5px solid #eef0ff;
 }
 .panel-header-icon{
   width:38px;height:38px;border-radius:12px;
@@ -284,8 +307,8 @@ body{
 .panel-header-icon.hack{ background:linear-gradient(135deg,#FF6B6B,#FF4757); }
 .panel-header-icon.setting{ background:linear-gradient(135deg,#26c6da,#0097A7); }
 .panel-header-icon i{font-size:18px;color:#fff}
-.panel-title{font-size:18px;font-weight:900;color:#fff}
-.panel-subtitle{font-size:11px;font-weight:700;color:rgba(180,160,255,.7);text-transform:uppercase;letter-spacing:.5px}
+.panel-title{font-size:18px;font-weight:900;color:#1a1a2e}
+.panel-subtitle{font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px}
 
 /* Panel content — empty by default, ready for your content */
 .panel-content{
@@ -293,8 +316,8 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .panel-empty{
-  font-size:13px;font-weight:600;
-  color:rgba(200,200,255,.3);
+  font-size:13px;font-weight:700;
+  color:#c4c7dd;
   text-align:center;
   letter-spacing:.3px;
 }
@@ -342,12 +365,11 @@ body{
   <button class="back-btn" id="backBtn" aria-label="Back">
     <i class="fa-solid fa-arrow-left"></i>
   </button>
+  <img class="hero-logo" src="https://i.ibb.co/Cp6rPPxp/20260218-115056.png" alt="Drago Predictor">
   <div class="hero-info">
     <span class="hero-sub">Drago Predictor</span>
     <span class="hero-title" id="heroTitle">Game</span>
   </div>
-  <!-- open-in-tab button REMOVED -->
-  <!-- hero logo image REMOVED -->
 </div>
 
 <!-- ── iframe / content area ── -->
@@ -368,7 +390,7 @@ body{
 
   <!-- Fallback if iframe blocked -->
   <div class="fallback" id="fallback">
-    <div class="fallback-icon">&#127918;</div>
+    <div class="fallback-icon"><i class="fa-solid fa-gamepad"></i></div>
     <div class="fallback-title" id="fbTitle">Game</div>
     <div class="fallback-desc">Yeh platform direct open nahi ho sakta. Naye tab mein kholo.</div>
     <a class="fallback-btn" id="fbBtn" href="#" target="_blank" rel="noopener noreferrer">
