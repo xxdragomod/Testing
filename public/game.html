@@ -429,7 +429,14 @@ function renderGames(list){
     card.onclick = ()=>{
       const dest = g.link || (g.slug ? "/game/"+g.slug : null);
       if(!dest) return;
-      const params = new URLSearchParams({ name: g.name||"", link: dest });
+      // tf: "30s" | "1m"  (backend prediction engine ke liye)
+      const tf = periodCode(selectedPeriod) === "30s" ? "30s" : "1m";
+      const params = new URLSearchParams({
+        name: g.name||"",
+        link: dest,
+        game: selectedGame||"",   // "trx" | "wingo"
+        tf: tf,
+      });
       window.location.href = "/game-link?" + params.toString();
     };
     const img = document.createElement("img");
