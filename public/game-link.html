@@ -226,7 +226,7 @@ body{
 
 @keyframes callPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 
-/* Image Container (Modern Glass Box Frame) */
+/* Image Container */
 .pred-image-container {
   width: 100%;
   display: flex;
@@ -388,69 +388,153 @@ body{
 }
 
 /* ════════════════════════════════════════
-   ⚙ SETTINGS CONTENT INSIDE SETTING PANEL
+   ⚙ NEW PREMIUM SETTINGS PANEL STYLES
 ════════════════════════════════════════ */
 .set-wrap{padding:20px 16px 0;}
 
 .set-section-label{
-  font-size:9.5px;font-weight:800;color:#6b7280; 
-  text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;
+  font-size:10px;font-weight:800;color:#6b7280; 
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;
   padding-left:2px;
 }
 
-.srv-card{
-  display:flex;align-items:center;gap:16px;
-  background:#ffffff; 
-  border:1.5px solid rgba(0,0,0,0.05);
-  border-radius:22px;padding:18px 16px;
-  margin-bottom:12px;cursor:pointer;
-  transition:border-color .25s,background .25s,transform .15s,box-shadow .25s;
-  user-select:none;position:relative;overflow:hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.01);
+/* Premium server header button */
+.premium-server-btn {
+  width: 100%;
+  background: rgba(124, 92, 252, 0.08);
+  border: 1.5px solid rgba(124, 92, 252, 0.15);
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
 }
-.srv-card::before{
-  content:'';position:absolute;inset:0;border-radius:18px;
-  background:linear-gradient(135deg,rgba(124,92,252,.06),rgba(91,106,240,.03));
-  opacity:0;transition:opacity .2s;
+.premium-server-btn:active {
+  transform: scale(0.97);
 }
-.srv-card:active{transform:scale(.98);}
-.srv-card.active{
-  border-color:#7C5CFC;
-  background:rgba(124,92,252,.03);
-  box-shadow:0 10px 25px rgba(124,92,252,.08);
+.premium-server-btn:hover {
+  background: rgba(124, 92, 252, 0.12);
 }
-.srv-card.active::before{opacity:1;}
+.premium-server-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+.premium-server-text {
+  font-size: 13px;
+  font-weight: 900;
+  color: #4C2FA1;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+  line-height: 1.4;
+}
 
-.srv-card-icon{
-  width:46px;height:46px;border-radius:14px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
+/* Server Selection Row */
+.servers-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
 }
-.srv-card-icon.color-ic{background:linear-gradient(135deg,#22c55e,#16a34a);}
-.srv-card-icon.size-ic{background:linear-gradient(135deg,#f59e0b,#d97706);}
-.srv-card-icon i{font-size:19px;color:#fff;}
-
-.srv-card-body{flex:1;}
-.srv-card-name{font-size:15px;font-weight:900;color:#1e293b;line-height:1.1;} 
-.srv-card-desc{font-size:11px;font-weight:600;color:#64748b;margin-top:3px;} 
-
-.srv-tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
-.srv-tag{
-  font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
-  padding:3px 9px;border-radius:6px;
+.server-select-btn {
+  flex: 1;
+  background: #f4f5fc;
+  border: 2.5px solid transparent;
+  border-radius: 20px;
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
-.srv-tag.ac{background:rgba(34,197,94,.15);color:#16a34a;border:1px solid rgba(34,197,94,.2);}
-.srv-tag.am{background:rgba(251,191,36,.12);color:#d97706;border:1px solid rgba(251,191,36,.18);}
-.srv-tag.pr{background:rgba(124,92,252,.15);color:#7C5CFC;border:1px solid rgba(124,92,252,.2);}
-
-.srv-radio{
-  width:24px;height:24px;border-radius:50%;flex-shrink:0;
-  border:2px solid #cbd5e1; 
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s,border-color .2s;
+.server-select-btn:active {
+  transform: scale(0.96);
 }
-.srv-card.active .srv-radio{background:#7C5CFC;border-color:#7C5CFC;}
-.srv-radio i{font-size:10px;color:#fff;display:none;}
-.srv-card.active .srv-radio i{display:block;}
+.server-select-btn.active {
+  background: rgba(124, 92, 252, 0.04);
+  border-color: #7C5CFC;
+  box-shadow: 0 8px 24px rgba(124, 92, 252, 0.1);
+}
+.server-select-img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+.server-select-text {
+  font-size: 14px;
+  font-weight: 900;
+  color: #555577;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.server-select-btn.active .server-select-text {
+  color: #7C5CFC;
+}
+
+/* Injector Switch Toggle Row */
+.injector-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1.5px solid rgba(124, 92, 252, 0.1);
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 18px rgba(124, 92, 252, 0.03);
+}
+.injector-label {
+  font-size: 18px;
+  font-weight: 900;
+  color: #7C5CFC;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+/* Custom Switch Toggle button */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 30px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #cbd5e1;
+  transition: .3s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+input:checked + .slider {
+  background-color: #7C5CFC;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
 
 .set-info{
   display:flex;align-items:flex-start;gap:10px;
@@ -461,6 +545,163 @@ body{
 }
 .set-info-ic{font-size:14px;color:#7C5CFC;flex-shrink:0;margin-top:1px;}
 .set-info-txt{font-size:11.5px;font-weight:600;color:#475569;line-height:1.55;}
+
+/* ════════════════════════════════════════
+   🛸 FLOATING DRAGGABLE WIDGET STYLES
+════════════════════════════════════════ */
+#injectorWidget {
+  position: fixed;
+  top: 25%;
+  left: calc(50% - 145px); /* Perfectly Centered horizontally */
+  z-index: 4000;
+  cursor: grab;
+  user-select: none;
+  touch-action: none; /* Prevents mobile scroll during drag */
+}
+#injectorWidget:active {
+  cursor: grabbing;
+}
+
+/* Floating Card Mode */
+.widget-card {
+  width: 290px;
+  background: #ffffff;
+  border-radius: 36px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 16px 48px rgba(124, 92, 252, 0.25);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: widgetPop .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes widgetPop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.widget-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #8c52ff;
+  padding: 2px;
+  background: #fff;
+  object-fit: contain;
+}
+.widget-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #4C2FA1;
+  letter-spacing: 0.2px;
+}
+.widget-divider {
+  width: 100%;
+  height: 1.5px;
+  background: #f1f1f6;
+  margin-bottom: 14px;
+}
+.widget-period-badge {
+  width: 100%;
+  background: linear-gradient(135deg, #8c52ff, #6236ff);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(124, 92, 252, 0.2);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.widget-body {
+  width: 100%;
+  margin-bottom: 16px;
+}
+.widget-pred-box {
+  width: 100%;
+  height: 110px;
+  background: #f8f9fe;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px;
+}
+.widget-pred-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.widget-pred-wait {
+  font-size: 24px;
+  font-weight: 900;
+  color: #a0aec0;
+  letter-spacing: 1px;
+}
+.widget-footer {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.widget-btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 22px;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.widget-btn:active {
+  transform: scale(0.95);
+}
+.btn-exit {
+  background: #f1f3f9;
+  color: #718096;
+}
+.btn-hide {
+  background: linear-gradient(135deg, #8c52ff, #6236ff);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(124, 92, 252, 0.3);
+}
+
+/* Minimized Spinning Ball Mode */
+.widget-ball {
+  width: 62px;
+  height: 62px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 3.5px solid #7C5CFC;
+  box-shadow: 0 8px 28px rgba(124, 92, 252, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: widgetBallSpin 12s linear infinite, widgetPop .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.widget-ball-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+@keyframes widgetBallSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
@@ -535,6 +776,33 @@ body{
   </div>
 </div>
 
+<!-- Floating Draggable Widget -->
+<div id="injectorWidget" style="display: none;">
+  <!-- Mode 1: Full Card -->
+  <div id="widgetCard" class="widget-card">
+    <div class="widget-header">
+      <img class="widget-logo" src="https://i.ibb.co/Cp6rPPxp/20260218-115056.png" alt="logo">
+      <span class="widget-title">Drago Predictor..</span>
+    </div>
+    <div class="widget-divider"></div>
+    <div class="widget-period-badge" id="widgetPeriod">PERIOD: —</div>
+    <div class="widget-body">
+      <div class="widget-pred-box" id="widgetPredBox">
+        <div class="widget-pred-wait">WAIT</div>
+      </div>
+    </div>
+    <div class="widget-footer">
+      <button class="widget-btn btn-exit" id="widgetExitBtn">EXIT</button>
+      <button class="widget-btn btn-hide" id="widgetHideBtn">HIDE</button>
+    </div>
+  </div>
+
+  <!-- Mode 2: Minimized Rotating Ball -->
+  <div id="widgetBall" class="widget-ball" style="display: none;">
+    <img class="widget-ball-logo" id="widgetBallLogo" src="https://i.ibb.co/1tLZMhZD/20260625-140159.png" alt="server-logo">
+  </div>
+</div>
+
 <!-- FAB -->
 <div class="fab-container" id="fabContainer">
   <div class="fab-side fab-left" id="fabLeft">
@@ -594,37 +862,40 @@ body{
   </div>
 
   <div class="set-wrap">
+    
+    <!-- Premium Server Btn Mock -->
+    <button class="premium-server-btn" id="premiumSrvBtn">
+      <img class="premium-server-img" src="https://i.ibb.co/PGQq37Rn/20260625-140319.png" alt="Premium Server">
+      <span class="premium-server-text">I want to use my<br>premium server</span>
+    </button>
+
     <div class="set-section-label">Available Servers</div>
 
-    <div class="srv-card" id="srvColor" data-srv="color">
-      <div class="srv-card-icon color-ic"><i class="fa-solid fa-palette"></i></div>
-      <div class="srv-card-body">
-        <div class="srv-card-name">NOVA X</div>
-        <div class="srv-card-desc">Color Prediction Server</div>
-        <div class="srv-tags">
-          <span class="srv-tag ac">GREEN / RED</span>
-          <span class="srv-tag pr">High Accuracy</span>
-        </div>
+    <!-- PRIME and NOVA Selector Row -->
+    <div class="servers-row">
+      <div class="server-select-btn" id="srvSize" data-srv="size">
+        <img class="server-select-img" src="https://i.ibb.co/1tLZMhZD/20260625-140159.png" alt="Prime">
+        <span class="server-select-text">PRIME</span>
       </div>
-      <div class="srv-radio"><i class="fa-solid fa-check"></i></div>
+      
+      <div class="server-select-btn" id="srvColor" data-srv="color">
+        <img class="server-select-img" src="https://i.ibb.co/fdcdwsGT/20260625-140109.png" alt="Nova">
+        <span class="server-select-text">NOVA</span>
+      </div>
     </div>
 
-    <div class="srv-card" id="srvSize" data-srv="size">
-      <div class="srv-card-icon size-ic"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></div>
-      <div class="srv-card-body">
-        <div class="srv-card-name">PRIME X</div>
-        <div class="srv-card-desc">Size Prediction Server</div>
-        <div class="srv-tags">
-          <span class="srv-tag am">BIG / SMALL</span>
-          <span class="srv-tag pr">Premium</span>
-        </div>
-      </div>
-      <div class="srv-radio"><i class="fa-solid fa-check"></i></div>
+    <!-- Switch Row for Injector -->
+    <div class="injector-row">
+      <span class="injector-label">INJECTOR</span>
+      <label class="switch">
+        <input type="checkbox" id="injectorToggle">
+        <span class="slider"></span>
+      </label>
     </div>
 
     <div class="set-info">
       <i class="fa-solid fa-circle-info set-info-ic"></i>
-      <span class="set-info-txt">Sirf selected server ka prediction HACK panel mein dikhega. Server switch karne par prediction turant update hoti hai.</span>
+      <span class="set-info-txt">Injector toggle on karne par screen par live drifting box floating dynamic predict karega. Switch off karne par ye gayab ho jayega.</span>
     </div>
   </div>
 </div>
@@ -691,6 +962,41 @@ function loadFrame(url){
   frame.onload=()=>{ clearTimeout(loadTimer); loader.classList.add("hide"); try{ void frame.contentWindow.location.href; }catch(e){} };
   frame.onerror=()=>{ clearTimeout(loadTimer); frame.style.display="none"; fb.classList.add("show"); loader.classList.add("hide"); };
   frame.src=url;
+}
+
+/* ── Custom Toast Utility ── */
+function showToast(msg) {
+  let toast = document.createElement('div');
+  toast.style.position = 'fixed';
+  toast.style.bottom = '100px';
+  toast.style.left = '50%';
+  toast.style.transform = 'translateX(-50%) translateY(20px)';
+  toast.style.background = 'rgba(26, 26, 46, 0.95)';
+  toast.style.backdropFilter = 'blur(8px)';
+  toast.style.color = '#fff';
+  toast.style.padding = '12px 24px';
+  toast.style.borderRadius = '16px';
+  toast.style.fontSize = '12px';
+  toast.style.fontWeight = '800';
+  toast.style.zIndex = '9999';
+  toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.2)';
+  toast.style.transition = 'opacity 0.3s, transform 0.3s';
+  toast.style.opacity = '0';
+  toast.style.textAlign = 'center';
+  toast.style.whiteSpace = 'nowrap';
+  toast.innerText = msg;
+  document.body.appendChild(toast);
+  
+  toast.offsetHeight; // trigger reflow
+  
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(-20px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
 }
 
 /* ══════════════════════════════
@@ -766,6 +1072,37 @@ function startTimerTick(){
   timerTmr=setInterval(tickTimer,1000);
 }
 function stopTimerTick(){ if(timerTmr){ clearInterval(timerTmr); timerTmr=null; } }
+
+/* ── Live Draggable widget updater ── */
+function updateFloatingWidget(res) {
+  const call = (res.prediction || "WAIT").toUpperCase();
+  const period = res.period || "—";
+  const meta = CALL_META[call];
+
+  const widgetPeriod = document.getElementById('widgetPeriod');
+  if (widgetPeriod) {
+    widgetPeriod.textContent = "PERIOD: " + period;
+  }
+
+  const widgetPredBox = document.getElementById('widgetPredBox');
+  if (widgetPredBox) {
+    if (meta) {
+      widgetPredBox.innerHTML = `<img src="${meta.img}" class="widget-pred-img" alt="${call}">`;
+    } else {
+      widgetPredBox.innerHTML = `<div class="widget-pred-wait">WAIT</div>`;
+    }
+  }
+
+  const ballLogo = document.getElementById('widgetBallLogo');
+  if (ballLogo) {
+    const srv = getServer();
+    if (srv === "size") {
+      ballLogo.src = "https://i.ibb.co/1tLZMhZD/20260625-140159.png"; // PRIME Logo
+    } else {
+      ballLogo.src = "https://i.ibb.co/fdcdwsGT/20260625-140109.png"; // NOVA Logo
+    }
+  }
+}
 
 function renderPredCard(d){
   const call   = (d.prediction||"WAIT").toUpperCase();
@@ -893,6 +1230,9 @@ async function loadPrediction(){
     }
     body.innerHTML = renderPredCard(res);
     startTimerTick();
+    
+    // Auto-update floating draggable widget
+    updateFloatingWidget(res);
   }catch(e){
     if(e&&e.status===403){
       const msg=(e.detail||"").toString();
@@ -922,7 +1262,7 @@ function startPredPoll(){
 function stopPredPoll(){ if(predTmr){ clearInterval(predTmr); predTmr=null; } stopTimerTick(); }
 
 function wireServerSelect(){
-  document.querySelectorAll(".srv-card").forEach(el=>{
+  document.querySelectorAll(".server-select-btn").forEach(el=>{
     el.addEventListener("click",()=>{
       setServer(el.dataset.srv);
       applyServerUI();
@@ -931,6 +1271,121 @@ function wireServerSelect(){
       loadPrediction();
     });
   });
+}
+
+/* ══════════════════════════════
+   🛸 WIDGET DRAGGABLE & TOGGLE SCRIPT
+══════════════════════════════ */
+function makeElementDraggable(el) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  let isDragging = false;
+
+  el.addEventListener('mousedown', dragMouseDown);
+  el.addEventListener('touchstart', dragTouchStart, { passive: false });
+
+  function dragMouseDown(e) {
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+    isDragging = false;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.addEventListener('mouseup', closeDragElement);
+    document.addEventListener('mousemove', elementDrag);
+  }
+
+  function dragTouchStart(e) {
+    if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+    isDragging = false;
+    pos3 = e.touches[0].clientX;
+    pos4 = e.touches[0].clientY;
+    document.addEventListener('touchend', closeDragElement);
+    document.addEventListener('touchmove', elementTouchDrag, { passive: false });
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    isDragging = true;
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    
+    let newTop = el.offsetTop - pos2;
+    let newLeft = el.offsetLeft - pos1;
+    
+    const maxLeft = window.innerWidth - el.offsetWidth;
+    const maxTop = window.innerHeight - el.offsetHeight;
+    
+    el.style.top = Math.max(0, Math.min(newTop, maxTop)) + "px";
+    el.style.left = Math.max(0, Math.min(newLeft, maxLeft)) + "px";
+  }
+
+  function elementTouchDrag(e) {
+    e.preventDefault();
+    isDragging = true;
+    let touch = e.touches[0];
+    pos1 = pos3 - touch.clientX;
+    pos2 = pos4 - touch.clientY;
+    pos3 = touch.clientX;
+    pos4 = touch.clientY;
+    
+    let newTop = el.offsetTop - pos2;
+    let newLeft = el.offsetLeft - pos1;
+    
+    const maxLeft = window.innerWidth - el.offsetWidth;
+    const maxTop = window.innerHeight - el.offsetHeight;
+    
+    el.style.top = Math.max(0, Math.min(newTop, maxTop)) + "px";
+    el.style.left = Math.max(0, Math.min(newLeft, maxLeft)) + "px";
+  }
+
+  function closeDragElement() {
+    document.removeEventListener('mouseup', closeDragElement);
+    document.removeEventListener('mousemove', elementDrag);
+    document.removeEventListener('touchend', closeDragElement);
+    document.removeEventListener('touchmove', elementTouchDrag);
+    
+    // Ball click click to expand handler
+    if (!isDragging) {
+      const ball = document.getElementById('widgetBall');
+      const card = document.getElementById('widgetCard');
+      if (ball && ball.style.display !== 'none') {
+        ball.style.display = 'none';
+        card.style.display = 'flex';
+      }
+    }
+  }
+}
+
+function wireInjectorToggle() {
+  const toggle = document.getElementById('injectorToggle');
+  const widget = document.getElementById('injectorWidget');
+  const card = document.getElementById('widgetCard');
+  const ball = document.getElementById('widgetBall');
+
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+      widget.style.display = 'block';
+      card.style.display = 'flex';
+      ball.style.display = 'none';
+      startPredPoll(); // Ensure predictions are pulling
+    } else {
+      widget.style.display = 'none';
+    }
+  });
+
+  // Exit floating button action
+  document.getElementById('widgetExitBtn').addEventListener('click', () => {
+    widget.style.display = 'none';
+    toggle.checked = false;
+  });
+
+  // Hide floating button action (Minimizes to rotating ball)
+  document.getElementById('widgetHideBtn').addEventListener('click', () => {
+    card.style.display = 'none';
+    ball.style.display = 'flex';
+  });
+
+  makeElementDraggable(widget);
 }
 
 /* ══════════════════════════════
@@ -1006,6 +1461,12 @@ async function init(){
 
   applyServerUI();
   wireServerSelect();
+  wireInjectorToggle();
+
+  // Premium server alert mock
+  document.getElementById('premiumSrvBtn').addEventListener('click', () => {
+    showToast("Abhi ye feature add nahi hua hai, bahut jald hone wala hai.");
+  });
 
   document.getElementById("backBtn").addEventListener("click",()=>{
     window.history.length>1 ? window.history.back() : window.location.href="/game";
