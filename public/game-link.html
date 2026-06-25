@@ -206,8 +206,8 @@ body{
 .panel-head{
   display:flex;align-items:center;
   justify-content:flex-start; /* Title shifted to LEFT */
-  padding:24px 20px 18px;
-  border-bottom:1px solid rgba(0,0,0,0.06);
+  padding:24px 20px 0px; /* Reduced bottom padding */
+  border-bottom:none; /* LINE REMOVED */
 }
 
 /* Universal Text Title Class */
@@ -218,102 +218,49 @@ body{
   letter-spacing: 2px;
 }
 
-
 /* ════════════════════════════════════════
    ██ PREDICTION CONTENT INSIDE HACK PANEL
 ════════════════════════════════════════ */
-.pred-wrap{padding:16px 16px 0;}
+.pred-wrap{padding:8px 16px 0;}
 
-/* Live status pill */
-.pred-live-row{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:14px;
-}
-.pred-live-pill{
-  display:flex;align-items:center;gap:7px;
-  background:rgba(34,197,94,.1);
-  border:1px solid rgba(34,197,94,.25);
-  padding:5px 12px 5px 8px;border-radius:20px;
-}
-.live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:livePulse 1.4s ease-in-out infinite;flex-shrink:0;}
-@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.65)}}
-.live-label{font-size:11px;font-weight:800;color:#22c55e;letter-spacing:.4px;text-transform:uppercase}
-.pred-period-tag{
-  font-size:11px;font-weight:800;
-  color:#4b5563; /* Darker Text */
-  background:#f3f4f6;
-  border:1px solid #e5e7eb;
-  padding:5px 12px;border-radius:20px;
-  letter-spacing:.3px;
+@keyframes callPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+
+/* Image styling - Almost full width */
+.pred-img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  animation: callPop .4s cubic-bezier(.34,1.56,.64,1);
 }
 
-/* ── BIG CALL CARD (Kept Dark for premium contrast) ── */
+/* Charcoal Period Text */
+.pred-period-charcoal {
+  font-size: 14px;
+  font-weight: 800;
+  color: #36454F; /* Charcoal Black */
+  text-align: center;
+  margin: 14px 0 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ── CALL CARD (Light Theme) ── */
 .pred-call-card{
-  background:linear-gradient(145deg,#1a1530,#130f25);
-  border:1.5px solid rgba(124,92,252,.2);
+  background:#ffffff;
+  border:1.5px solid #f1f5f9;
+  box-shadow:0 10px 30px rgba(0,0,0,0.04);
   border-radius:22px;
-  padding:22px 20px 20px;
+  padding:16px;
   position:relative;overflow:hidden;
   margin-bottom:12px;
 }
-.pred-call-card::before{
-  content:'';position:absolute;top:-40px;right:-40px;
-  width:140px;height:140px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,92,252,.18) 0%,transparent 70%);
-  pointer-events:none;
-}
-.pred-period-label{
-  font-size:10.5px;font-weight:800;color:rgba(255,255,255,.35);
-  text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;
-  display:flex;align-items:center;gap:8px;
-}
-.pred-period-label b{color:rgba(255,255,255,.7);font-weight:900;}
 
-/* Divider */
-.pred-divider{height:1px;background:rgba(255,255,255,.06);margin:0 0 16px;}
-
-/* Call badge — the big centered prediction */
-.pred-call-center{display:flex;align-items:center;justify-content:center;gap:16px;padding:4px 0 8px;}
-.pred-call-badge{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  width:120px;height:120px;border-radius:28px;
-  font-size:22px;font-weight:900;letter-spacing:.5px;
-  position:relative;
-  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
-  animation:callPop .4s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes callPop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
-.pred-call-badge.green{
-  background:linear-gradient(145deg,#14532d,#166534);
-  box-shadow:0 0 0 1.5px rgba(34,197,94,.4),0 12px 32px rgba(22,163,74,.35);
-  color:#4ade80;
-}
-.pred-call-badge.red{
-  background:linear-gradient(145deg,#7f1d1d,#991b1b);
-  box-shadow:0 0 0 1.5px rgba(239,68,68,.4),0 12px 32px rgba(185,28,28,.35);
-  color:#f87171;
-}
-.pred-call-badge.big{
-  background:linear-gradient(145deg,#1e3a5f,#1d4ed8);
-  box-shadow:0 0 0 1.5px rgba(59,130,246,.4),0 12px 32px rgba(29,78,216,.35);
-  color:#60a5fa;
-}
-.pred-call-badge.small{
-  background:linear-gradient(145deg,#4c1d95,#6d28d9);
-  box-shadow:0 0 0 1.5px rgba(139,92,246,.4),0 12px 32px rgba(109,40,217,.35);
-  color:#a78bfa;
-}
-.pred-call-badge.wait{
-  background:linear-gradient(145deg,#1f1f30,#252540);
-  box-shadow:0 0 0 1.5px rgba(148,163,184,.2);
-  color:rgba(255,255,255,.3);
-}
-.pred-call-icon{font-size:32px;margin-bottom:6px;line-height:1;}
-.pred-call-word{font-size:18px;font-weight:900;letter-spacing:.8px;line-height:1;}
-
-/* Confidence ring + stats */
+/* Confidence ring + stats (Light Mode) */
 .pred-stats-row{
-  display:flex;align-items:center;gap:12px;margin-top:16px;
+  display:flex;align-items:center;gap:12px;
 }
 .pred-ring-wrap{
   flex-shrink:0;position:relative;
@@ -321,37 +268,37 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .pred-ring-svg{position:absolute;inset:0;width:100%;height:100%;}
-.pred-ring-bg{stroke:rgba(255,255,255,.06);stroke-width:5;fill:none;}
+.pred-ring-bg{stroke:#f1f5f9;stroke-width:5;fill:none;} /* Light grey background ring */
 .pred-ring-fill{stroke-width:5;fill:none;stroke-linecap:round;transform-origin:center;transform:rotate(-90deg);transition:stroke-dashoffset .6s ease;}
-.pred-ring-fill.green{stroke:#22c55e;}
+.pred-ring-fill.green{stroke:#16a34a;}
 .pred-ring-fill.red{stroke:#ef4444;}
 .pred-ring-fill.blue{stroke:#3b82f6;}
 .pred-ring-fill.purple{stroke:#8b5cf6;}
 .pred-ring-val{
   position:relative;z-index:1;
-  font-size:15px;font-weight:900;color:#fff;
+  font-size:15px;font-weight:900;color:#1e293b; /* Dark Slate value */
   line-height:1;text-align:center;
 }
-.pred-ring-lbl{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.4px;margin-top:1px;}
+.pred-ring-lbl{font-size:7.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-top:1px;}
 
 .pred-right-stats{flex:1;display:flex;flex-direction:column;gap:10px;}
 .pred-stat-row{
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.07);
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
   border-radius:12px;padding:9px 13px;
 }
-.pred-stat-row .slbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.5px;}
-.pred-stat-row .sval{font-size:13px;font-weight:900;color:#fff;}
-.pred-stat-row .sval.green{color:#4ade80;}
-.pred-stat-row .sval.amber{color:#fbbf24;}
+.pred-stat-row .slbl{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;}
+.pred-stat-row .sval{font-size:13px;font-weight:900;color:#0f172a;} /* Dark Slate */
+.pred-stat-row .sval.green{color:#16a34a;}
+.pred-stat-row .sval.amber{color:#d97706;}
 
 /* Win rate bar */
 .pred-wr-row{margin-top:14px;}
 .pred-wr-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.pred-wr-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px;}
-.pred-wr-pct{font-size:12px;font-weight:900;color:#4ade80;}
-.pred-wr-track{height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden;}
+.pred-wr-lbl{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;}
+.pred-wr-pct{font-size:12px;font-weight:900;color:#16a34a;}
+.pred-wr-track{height:6px;border-radius:6px;background:#e2e8f0;overflow:hidden;}
 .pred-wr-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .6s ease;width:0;}
 
 /* Auto-update footer */
@@ -555,21 +502,12 @@ body{
 <div class="slide-panel" id="hackPanel">
   <div class="panel-handle"></div>
 
-  <!-- Left Aligned Header -->
+  <!-- Left Aligned Header without bottom line -->
   <div class="panel-head">
     <div class="panel-title-main">HACK</div>
   </div>
 
   <div class="pred-wrap">
-    <!-- Live pill + period tag -->
-    <div class="pred-live-row">
-      <div class="pred-live-pill">
-        <span class="live-dot"></span>
-        <span class="live-label">Live</span>
-      </div>
-      <span class="pred-period-tag" id="predGameLabel">-- · --</span>
-    </div>
-
     <!-- Main prediction body -->
     <div id="predBody">
       <div class="pred-loading">
@@ -589,7 +527,7 @@ body{
 <div class="slide-panel" id="settingPanel">
   <div class="panel-handle"></div>
 
-  <!-- Left Aligned Header -->
+  <!-- Left Aligned Header without bottom line -->
   <div class="panel-head">
     <div class="panel-title-main">SETTING</div>
   </div>
@@ -700,12 +638,12 @@ function loadFrame(url){
 function getServer(){ return localStorage.getItem("_pred_srv")||"color"; }
 function setServer(s){ localStorage.setItem("_pred_srv",s); }
 
-// Map prediction call → badge class + icon
+// Map prediction call → Image URLs Provided by you
 const CALL_META = {
-  GREEN:{ cls:"green", icon:"fa-circle", word:"GREEN" },
-  RED:  { cls:"red",   icon:"fa-circle", word:"RED" },
-  BIG:  { cls:"big",   icon:"fa-arrow-up", word:"BIG" },
-  SMALL:{ cls:"small", icon:"fa-arrow-down", word:"SMALL" },
+  GREEN:{ img:"https://i.ibb.co/8nF8ZwD4/1770796863859-316fd738-2c08-4a2f-a306-c88d5f75891b.png" },
+  RED:  { img:"https://i.ibb.co/6RqjsgDz/1770796950403-a8434662-f5cf-446a-9e7d-11c950273688.png" },
+  BIG:  { img:"https://i.ibb.co/Vk9pTW8/1770190123131-24e81887-a75f-4cd8-aa8f-de3b3e9b4468.png" },
+  SMALL:{ img:"https://i.ibb.co/0VByJkGF/1770189526625-c1b6c510-cf81-4589-a305-86430a66146a.png" },
 };
 
 // Ring circumference for r=30
@@ -736,46 +674,22 @@ function renderPredCard(d){
 
   const wrFill = `<div class="pred-wr-fill" style="width:${wr}%"></div>`;
 
-  if(!meta){
-    // WAIT state
-    return `
-      <div class="pred-call-card">
-        <div class="pred-period-label">Next Period · <b>${period}</b></div>
-        <div class="pred-divider"></div>
-        <div class="pred-call-center">
-          <div class="pred-call-badge wait">
-            <i class="fa-solid fa-clock pred-call-icon" style="font-size:28px;color:rgba(255,255,255,.2)"></i>
-            <span class="pred-call-word" style="color:rgba(255,255,255,.2)">WAIT</span>
-          </div>
-        </div>
-        <div class="pred-stats-row">
-          ${buildRingSVG(conf, ringColor)}
-          <div style="position:relative;z-index:1;text-align:center">
-            <div class="pred-ring-val">${conf}%</div>
-            <div class="pred-ring-lbl">Confidence</div>
-          </div>
-          <div class="pred-right-stats">
-            <div class="pred-stat-row"><span class="slbl">Win Rate</span><span class="sval green">${wr}%</span></div>
-            <div class="pred-stat-row"><span class="slbl">Level</span><span class="sval amber">${badge}</span></div>
-          </div>
-        </div>
-        <div class="pred-wr-row">
-          <div class="pred-wr-head"><span class="pred-wr-lbl">Win Rate</span><span class="pred-wr-pct">${wr}%</span></div>
-          <div class="pred-wr-track">${wrFill}</div>
-        </div>
-      </div>`;
+  // Fallback if prediction is "WAIT" or not matched
+  let imageUI = `<div style="background:#f8fafc; border: 1.5px solid #e2e8f0; width:100%; height:140px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:900; color:#94a3b8; letter-spacing:1px; animation: callPop .4s cubic-bezier(.34,1.56,.64,1);"><i class="fa-solid fa-clock" style="margin-right:10px;"></i> WAIT</div>`;
+  
+  if(meta) {
+    imageUI = `<img src="${meta.img}" class="pred-img" alt="${call}">`;
   }
 
   return `
     <div class="pred-call-card">
-      <div class="pred-period-label">Next Period · <b>${period}</b></div>
-      <div class="pred-divider"></div>
-      <div class="pred-call-center">
-        <div class="pred-call-badge ${meta.cls}">
-          <i class="fa-solid ${meta.icon} pred-call-icon"></i>
-          <span class="pred-call-word">${meta.word}</span>
-        </div>
-      </div>
+      
+      <!-- Big Prediction Image -->
+      ${imageUI}
+
+      <!-- Charcoal Text Period -->
+      <div class="pred-period-charcoal">Period : ${period}</div>
+      
       <div class="pred-stats-row">
         <div class="pred-ring-wrap">
           ${buildRingSVG(conf, ringColor)}
@@ -799,11 +713,6 @@ function renderPredCard(d){
 function applyServerUI(){
   const s = getServer();
   const isColor = s==="color";
-  
-  const lbl = document.getElementById("predGameLabel");
-  if(lbl) {
-      lbl.textContent = (predGame==="trx"?"TRX":"Wingo") + " · " + (predTf||"--");
-  }
   
   const c=document.getElementById("srvColor"), z=document.getElementById("srvSize");
   if(c&&z){ c.classList.toggle("active",isColor); z.classList.toggle("active",!isColor); }
@@ -833,8 +742,6 @@ async function loadPrediction(){
       </div>`;
       return;
     }
-    document.getElementById("predGameLabel").textContent =
-      (predGame==="trx"?"TRX":"Wingo")+" · "+predTf;
     body.innerHTML = renderPredCard(res);
   }catch(e){
     if(e&&e.status===403){
@@ -842,7 +749,7 @@ async function loadPrediction(){
       if(msg.indexOf("upgrade")>=0){
         body.innerHTML=`<div class="pred-msg-box">
           <span class="pred-msg-ic" style="font-size:40px">🔒</span>
-          <span class="pred-msg-txt">Prediction sirf <b style="color:#a78bfa">paid plan</b> ke saath milti hai.<br>Free plan mein sirf games access hain.</span>
+          <span class="pred-msg-txt">Prediction sirf <b style="color:#7C5CFC">paid plan</b> ke saath milti hai.<br>Free plan mein sirf games access hain.</span>
           <a class="pred-upgrade-btn" href="/payment"><i class="fa-solid fa-crown"></i> Upgrade Plan</a>
         </div>`;
         stopPredPoll(); return;
@@ -947,7 +854,6 @@ async function init(){
   document.getElementById("fbTitle").textContent=gameName;
   document.title=gameName+" — Drago Predictor";
 
-  if(predGame&&predTf) document.getElementById("predGameLabel").textContent=(predGame==="trx"?"TRX":"Wingo")+" · "+predTf;
   applyServerUI();
   wireServerSelect();
 
