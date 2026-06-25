@@ -272,60 +272,51 @@ body{
   text-transform: uppercase;
 }
 
-/* ── STATS CARD (Only has Confidence, Level, Win Rate) ── */
+/* ── STATS CARD — NO BOX ── */
 .pred-call-card{
-  background:#ffffff;
-  border:1.5px solid #f1f5f9;
-  box-shadow:0 10px 30px rgba(0,0,0,0.04);
-  border-radius:22px;
-  padding:16px;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:12px;
+  background:transparent;border:none;box-shadow:none;
+  border-radius:0;padding:0;position:relative;
+  overflow:visible;margin-bottom:12px;
 }
 
-/* Confidence ring + stats */
-.pred-stats-row{
-  display:flex;align-items:center;gap:12px;
-}
+/* Top row: big conf ring + win rate box */
+.pred-stats-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
 .pred-ring-wrap{
   flex-shrink:0;position:relative;
-  width:72px;height:72px;
+  width:92px;height:92px;
   display:flex;align-items:center;justify-content:center;
 }
 .pred-ring-svg{position:absolute;inset:0;width:100%;height:100%;}
-.pred-ring-bg{stroke:#f1f5f9;stroke-width:5;fill:none;} 
-.pred-ring-fill{stroke-width:5;fill:none;stroke-linecap:round;transform-origin:center;transform:rotate(-90deg);transition:stroke-dashoffset .6s ease;}
+.pred-ring-bg{stroke:#e2e8f0;stroke-width:9;fill:none;}
+.pred-ring-fill{stroke-width:9;fill:none;stroke-linecap:round;transform-origin:center;transform:rotate(-90deg);transition:stroke-dashoffset .6s ease;}
 .pred-ring-fill.green{stroke:#16a34a;}
 .pred-ring-fill.red{stroke:#ef4444;}
 .pred-ring-fill.blue{stroke:#3b82f6;}
 .pred-ring-fill.purple{stroke:#8b5cf6;}
-.pred-ring-val{
-  position:relative;z-index:1;
-  font-size:15px;font-weight:900;color:#1e293b; 
-  line-height:1;text-align:center;
-}
-.pred-ring-lbl{font-size:7.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-top:1px;}
+.pred-ring-val{position:relative;z-index:1;font-size:18px;font-weight:900;color:#1e293b;line-height:1;text-align:center;}
+.pred-ring-lbl{font-size:7.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
 
-.pred-right-stats{flex:1;display:flex;flex-direction:column;gap:10px;}
-.pred-stat-row{
-  display:flex;align-items:center;justify-content:space-between;
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:12px;padding:9px 13px;
+/* Win Rate Big Box */
+.pred-wr-bigbox{
+  flex:1;height:92px;
+  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+  border:2px solid #86efac;border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
 }
-.pred-stat-row .slbl{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;}
-.pred-stat-row .sval{font-size:13px;font-weight:900;color:#0f172a;} 
-.pred-stat-row .sval.green{color:#16a34a;}
-.pred-stat-row .sval.amber{color:#d97706;}
+.pred-wr-bigbox .wr-val{font-size:32px;font-weight:900;color:#16a34a;line-height:1;}
+.pred-wr-bigbox .wr-lbl{font-size:9px;font-weight:800;color:#22c55e;text-transform:uppercase;letter-spacing:.6px;}
 
-/* Win rate bar */
-.pred-wr-row{margin-top:14px;}
-.pred-wr-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.pred-wr-lbl{font-size:10px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;}
-.pred-wr-pct{font-size:12px;font-weight:900;color:#16a34a;}
-.pred-wr-track{height:6px;border-radius:6px;background:#e2e8f0;overflow:hidden;}
-.pred-wr-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .6s ease;width:0;}
+/* 3 meters row */
+.pred-meters-row{display:flex;gap:8px;}
+.pred-meter-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.pred-meter-ring{
+  position:relative;width:72px;height:72px;
+  display:flex;align-items:center;justify-content:center;
+}
+.pred-meter-ring svg{position:absolute;inset:0;width:100%;height:100%;}
+.pred-meter-val{position:relative;z-index:1;text-align:center;font-size:12px;font-weight:900;color:#1e293b;line-height:1;}
+.pred-meter-sub{font-size:7px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.3px;margin-top:2px;}
+.pred-meter-lbl{font-size:9px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.5px;text-align:center;}
 
 /* Auto-update footer */
 .pred-footer{
@@ -670,18 +661,75 @@ const CALL_META = {
   SMALL:{ img:"https://i.ibb.co/0VByJkGF/1770189526625-c1b6c510-cf81-4589-a305-86430a66146a.png" },
 };
 
-// Ring circumference for r=30
-const R = 30;
-const CIRC = 2 * Math.PI * R;
+// ── Ring helpers ──
+const R_MAIN = 33, CIRC_MAIN = 2*Math.PI*R_MAIN;
+const R_SM   = 26, CIRC_SM   = 2*Math.PI*R_SM;
 
-function buildRingSVG(pct, colorClass){
-  const offset = CIRC - (pct/100)*CIRC;
-  return `<svg class="pred-ring-svg" viewBox="0 0 72 72">
-    <circle class="pred-ring-bg" cx="36" cy="36" r="${R}"/>
-    <circle class="pred-ring-fill ${colorClass}" cx="36" cy="36" r="${R}"
-      stroke-dasharray="${CIRC}" stroke-dashoffset="${offset}"/>
+function buildMainRing(pct, colorClass){
+  const offset = CIRC_MAIN - (pct/100)*CIRC_MAIN;
+  return `<svg class="pred-ring-svg" viewBox="0 0 92 92">
+    <circle class="pred-ring-bg" cx="46" cy="46" r="${R_MAIN}"/>
+    <circle class="pred-ring-fill ${colorClass}" cx="46" cy="46" r="${R_MAIN}"
+      stroke-dasharray="${CIRC_MAIN.toFixed(2)}" stroke-dashoffset="${offset.toFixed(2)}"/>
   </svg>`;
 }
+
+function buildSmallRing(pct, stroke, id){
+  const offset = CIRC_SM - (pct/100)*CIRC_SM;
+  return `<svg viewBox="0 0 68 68" style="position:absolute;inset:0;width:100%;height:100%">
+    <circle cx="34" cy="34" r="${R_SM}" fill="none" stroke="#e2e8f0" stroke-width="7"/>
+    <circle ${id?`id="${id}"`:''}  cx="34" cy="34" r="${R_SM}" fill="none" stroke="${stroke}" stroke-width="7"
+      stroke-linecap="round" stroke-dasharray="${CIRC_SM.toFixed(2)}" stroke-dashoffset="${offset.toFixed(2)}"
+      transform="rotate(-90 34 34)" style="transition:stroke-dashoffset .5s ease"/>
+  </svg>`;
+}
+
+function badgePct(badge){
+  const b=(badge||"").toLowerCase();
+  if(b.includes("diamond")||b.includes("plat")) return 100;
+  if(b.includes("gold")) return 75;
+  if(b.includes("silver")) return 50;
+  if(b.includes("bronze")) return 25;
+  return 40;
+}
+
+function parseTfSecs(tf){
+  if(!tf) return 60;
+  tf=tf.toLowerCase().trim();
+  const m=tf.match(/(\d+)\s*m/); if(m) return parseInt(m[1])*60;
+  const s=tf.match(/(\d+)\s*s/); if(s) return parseInt(s[1]);
+  return 60;
+}
+
+// ── Timer tick (live countdown synced to real clock) ──
+let timerTmr=null;
+let _tfSecs=60;
+
+function getTimerRemaining(){
+  const now=Math.floor(Date.now()/1000);
+  return _tfSecs - (now % _tfSecs);
+}
+
+function tickTimer(){
+  const rem=getTimerRemaining();
+  const pct=(rem/_tfSecs)*100;
+  const offset=CIRC_SM-(pct/100)*CIRC_SM;
+  const mins=Math.floor(rem/60), secs=rem%60;
+  const str=mins>0?`${mins}:${String(secs).padStart(2,'0')}`:`${secs}s`;
+  const fillEl=document.getElementById('tmr-fill');
+  const valEl=document.getElementById('tmr-val');
+  if(!fillEl||!valEl){ stopTimerTick(); return; }
+  fillEl.setAttribute('stroke-dashoffset', offset.toFixed(2));
+  valEl.textContent=str;
+}
+
+function startTimerTick(){
+  _tfSecs=parseTfSecs(predTf)||60;
+  tickTimer();
+  if(timerTmr) return;
+  timerTmr=setInterval(tickTimer,1000);
+}
+function stopTimerTick(){ if(timerTmr){ clearInterval(timerTmr); timerTmr=null; } }
 
 function renderPredCard(d){
   const call   = (d.prediction||"WAIT").toUpperCase();
@@ -691,48 +739,88 @@ function renderPredCard(d){
   const period = d.period || "—";
   const meta   = CALL_META[call];
 
-  let ringColor = "purple";
+  let ringColor="purple";
   if(call==="GREEN") ringColor="green";
   else if(call==="RED") ringColor="red";
   else if(call==="BIG"||call==="SMALL") ringColor="blue";
 
-  const wrFill = `<div class="pred-wr-fill" style="width:${wr}%"></div>`;
+  const ringColors={green:"#16a34a",red:"#ef4444",blue:"#3b82f6",purple:"#8b5cf6"};
+  const confStroke=ringColors[ringColor]||"#8b5cf6";
 
-  // Image Fallback (WAIT state)
-  let imageUI = `<div class="pred-img-wait"><i class="fa-solid fa-clock" style="margin-right:10px;"></i> WAIT</div>`;
-  
-  if(meta) {
-    // Large Image
-    imageUI = `<img src="${meta.img}" class="pred-img-large" alt="${call}">`;
-  }
+  const lvlPct=badgePct(badge);
+
+  // Timer initial state
+  const tfSecs=parseTfSecs(predTf)||60;
+  const initRem=tfSecs-(Math.floor(Date.now()/1000)%tfSecs);
+  const initPct=(initRem/tfSecs)*100;
+  const initMins=Math.floor(initRem/60), initSecs=initRem%60;
+  const initStr=initMins>0?`${initMins}:${String(initSecs).padStart(2,'0')}`:`${initSecs}s`;
+
+  let imageUI=`<div class="pred-img-wait"><i class="fa-solid fa-clock" style="margin-right:10px;"></i> WAIT</div>`;
+  if(meta) imageUI=`<img src="${meta.img}" class="pred-img-large" alt="${call}">`;
 
   return `
-    <!-- Large Image Outside -->
-    <div class="pred-image-container">
-      ${imageUI}
-    </div>
-
-    <!-- Charcoal Period Text Outside -->
+    <div class="pred-image-container">${imageUI}</div>
     <div class="pred-period-charcoal">Period : ${period}</div>
 
-    <!-- Clean Stats Box -->
     <div class="pred-call-card">
+      <!-- Row 1: Confidence ring + Win Rate big box -->
       <div class="pred-stats-row">
         <div class="pred-ring-wrap">
-          ${buildRingSVG(conf, ringColor)}
+          ${buildMainRing(conf, ringColor)}
           <div style="position:relative;z-index:1;text-align:center">
             <div class="pred-ring-val">${conf}%</div>
             <div class="pred-ring-lbl">Conf.</div>
           </div>
         </div>
-        <div class="pred-right-stats">
-          <div class="pred-stat-row"><span class="slbl">Win Rate</span><span class="sval green">${wr}%</span></div>
-          <div class="pred-stat-row"><span class="slbl">Level</span><span class="sval amber">${badge}</span></div>
+        <div class="pred-wr-bigbox">
+          <div class="wr-val">${wr}%</div>
+          <div class="wr-lbl">Win Rate</div>
         </div>
       </div>
-      <div class="pred-wr-row">
-        <div class="pred-wr-head"><span class="pred-wr-lbl">Win Rate</span><span class="pred-wr-pct">${wr}%</span></div>
-        <div class="pred-wr-track">${wrFill}</div>
+
+      <!-- Row 2: 3 meters — Level | Win Rate | Timer -->
+      <div class="pred-meters-row">
+        <!-- Level -->
+        <div class="pred-meter-item">
+          <div class="pred-meter-ring">
+            ${buildSmallRing(lvlPct,"#d97706","")}
+            <div class="pred-meter-val">
+              ${badge}
+              <div class="pred-meter-sub">Level</div>
+            </div>
+          </div>
+          <span class="pred-meter-lbl">Level</span>
+        </div>
+        <!-- Win Rate -->
+        <div class="pred-meter-item">
+          <div class="pred-meter-ring">
+            ${buildSmallRing(wr,"#16a34a","")}
+            <div class="pred-meter-val">
+              ${wr}%
+              <div class="pred-meter-sub">WR</div>
+            </div>
+          </div>
+          <span class="pred-meter-lbl">Win Rate</span>
+        </div>
+        <!-- Timer -->
+        <div class="pred-meter-item">
+          <div class="pred-meter-ring">
+            <svg viewBox="0 0 68 68" style="position:absolute;inset:0;width:100%;height:100%">
+              <circle cx="34" cy="34" r="${R_SM}" fill="none" stroke="#e2e8f0" stroke-width="7"/>
+              <circle id="tmr-fill" cx="34" cy="34" r="${R_SM}" fill="none" stroke="#7C5CFC" stroke-width="7"
+                stroke-linecap="round"
+                stroke-dasharray="${CIRC_SM.toFixed(2)}"
+                stroke-dashoffset="${(CIRC_SM-(initPct/100)*CIRC_SM).toFixed(2)}"
+                transform="rotate(-90 34 34)" style="transition:stroke-dashoffset .5s ease"/>
+            </svg>
+            <div class="pred-meter-val" id="tmr-val">
+              ${initStr}
+              <div class="pred-meter-sub">left</div>
+            </div>
+          </div>
+          <span class="pred-meter-lbl">Timer</span>
+        </div>
       </div>
     </div>`;
 }
@@ -769,6 +857,7 @@ async function loadPrediction(){
       return;
     }
     body.innerHTML = renderPredCard(res);
+    startTimerTick();
   }catch(e){
     if(e&&e.status===403){
       const msg=(e.detail||"").toString();
@@ -795,7 +884,7 @@ function startPredPoll(){
   loadPrediction();
   predTmr=setInterval(loadPrediction,10000);
 }
-function stopPredPoll(){ if(predTmr){ clearInterval(predTmr); predTmr=null; } }
+function stopPredPoll(){ if(predTmr){ clearInterval(predTmr); predTmr=null; } stopTimerTick(); }
 
 function wireServerSelect(){
   document.querySelectorAll(".srv-card").forEach(el=>{
