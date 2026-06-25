@@ -172,7 +172,7 @@ body{
 .fab-side-btn:active{transform:scale(.92) !important}
 
 /* ════════════════════════════════════════
-   SLIDE-UP PANEL BASE
+   SLIDE-UP PANEL BASE (WHITE THEME NOW)
 ════════════════════════════════════════ */
 .panel-overlay{
   position:fixed;inset:0;
@@ -184,80 +184,43 @@ body{
 
 .slide-panel{
   position:fixed;bottom:0;left:0;right:0;z-index:450;
-  background:#0f0c1e; /* Default dark background for Setting Panel */
+  background:#ffffff; /* White Base for Both Panels */
   border-radius:28px 28px 0 0;
-  border-top:1.5px solid rgba(124,92,252,.25);
+  border-top:1.5px solid rgba(0,0,0,0.05);
   padding:0 0 40px;
   transform:translateY(100%);
   transition:transform .38s cubic-bezier(.22,1,.36,1);
   height:72vh;max-height:72vh;overflow-y:auto;
-  box-shadow:0 -16px 60px rgba(80,50,200,.35);
+  box-shadow:0 -16px 60px rgba(0,0,0,0.1);
 }
 .slide-panel.show{transform:translateY(0);}
 
 .panel-handle{
   width:40px;height:4px;
-  background:rgba(124,92,252,.35);border-radius:2px;
+  background:rgba(0,0,0,0.15); /* Darker Handle for White BG */
+  border-radius:2px;
   margin:14px auto 0;
 }
 
-/* ── Panel Header (Default) ── */
+/* ── Panel Header (LEFT ALIGNED) ── */
 .panel-head{
-  display:flex;align-items:center;gap:12px;
-  padding:18px 20px 16px;
-  border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;
+  justify-content:flex-start; /* Title shifted to LEFT */
+  padding:24px 20px 18px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
 }
-.panel-head-icon{
-  width:40px;height:40px;border-radius:13px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.panel-head-icon.setting{background:linear-gradient(135deg,#06b6d4,#0e7490);}
-.panel-head-icon i{font-size:17px;color:#fff}
-.panel-head-title{font-size:16px;font-weight:900;color:#fff;line-height:1.1}
-.panel-head-sub{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
 
-
-/* ════════════════════════════════════════
-   ██ HACK PANEL (WHITE THEME OVERRIDES)
-════════════════════════════════════════ */
-#hackPanel {
-  background: #ffffff; /* White background */
-  border-top: 1.5px solid rgba(0,0,0,0.05);
-  box-shadow: 0 -16px 60px rgba(0,0,0,0.1);
-}
-#hackPanel .panel-handle {
-  background: rgba(0,0,0,0.15);
-}
-#hackPanel .panel-head {
-  justify-content: center;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  padding: 24px 20px 18px;
-}
-.hack-title-main {
+/* Universal Text Title Class */
+.panel-title-main {
   font-size: 26px;
   font-weight: 900;
   color: #1a1a2e; /* Dark text */
   letter-spacing: 2px;
 }
 
-#hackPanel .pred-period-tag {
-  color: #4b5563;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-}
-#hackPanel .pred-footer-txt, #hackPanel .pred-footer-ic {
-  color: #9ca3af;
-}
-#hackPanel .pred-footer {
-  border-top: 1px solid #f3f4f6;
-}
-#hackPanel .pred-msg-txt, #hackPanel .loader-text {
-  color: #6b7280;
-}
-
 
 /* ════════════════════════════════════════
-   ██ PREDICTION CARD INSIDE HACK PANEL
+   ██ PREDICTION CONTENT INSIDE HACK PANEL
 ════════════════════════════════════════ */
 .pred-wrap{padding:16px 16px 0;}
 
@@ -277,6 +240,9 @@ body{
 .live-label{font-size:11px;font-weight:800;color:#22c55e;letter-spacing:.4px;text-transform:uppercase}
 .pred-period-tag{
   font-size:11px;font-weight:800;
+  color:#4b5563; /* Darker Text */
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
   padding:5px 12px;border-radius:20px;
   letter-spacing:.3px;
 }
@@ -392,17 +358,18 @@ body{
 .pred-footer{
   display:flex;align-items:center;justify-content:center;gap:6px;
   margin-top:14px;padding-top:12px;
+  border-top:1px solid #f3f4f6; /* Lighter border */
 }
-.pred-footer-ic{font-size:10px;}
-.pred-footer-txt{font-size:10px;font-weight:700;letter-spacing:.3px;}
+.pred-footer-ic{font-size:10px;color:#9ca3af;}
+.pred-footer-txt{font-size:10px;font-weight:700;color:#9ca3af;letter-spacing:.3px;}
 
 /* Loading / error states */
 .pred-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:50px 0;}
 .pred-loading .spinner{width:32px;height:32px;border-color:rgba(124,92,252,.2);border-top-color:#7C5CFC;}
-.pred-loading .loader-text{font-size:11.5px;}
+.pred-loading .loader-text{font-size:11.5px;color:#6b7280;}
 .pred-msg-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;gap:10px;}
 .pred-msg-ic{font-size:36px;opacity:.5;}
-.pred-msg-txt{font-size:13px;font-weight:700;line-height:1.6;}
+.pred-msg-txt{font-size:13px;font-weight:700;color:#6b7280;line-height:1.6;}
 .pred-upgrade-btn{
   display:inline-flex;align-items:center;gap:8px;
   margin-top:6px;background:linear-gradient(135deg,#7C5CFC,#5B6AF0);color:#fff;
@@ -412,21 +379,21 @@ body{
 }
 
 /* ════════════════════════════════════════
-   ⚙ SETTINGS PANEL — PREMIUM UI
+   ⚙ SETTINGS CONTENT INSIDE SETTING PANEL
 ════════════════════════════════════════ */
 .set-wrap{padding:20px 16px 0;}
 
 .set-section-label{
-  font-size:9.5px;font-weight:800;color:rgba(255,255,255,.25);
+  font-size:9.5px;font-weight:800;color:#6b7280; /* Dark label */
   text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;
   padding-left:2px;
 }
 
-/* Server option cards */
+/* Server option cards (Updated for White Theme) */
 .srv-card{
   display:flex;align-items:center;gap:14px;
-  background:rgba(255,255,255,.04);
-  border:1.5px solid rgba(255,255,255,.08);
+  background:#f8fafc; /* Light Grey background */
+  border:1.5px solid #e2e8f0;
   border-radius:18px;padding:16px 14px;
   margin-bottom:10px;cursor:pointer;
   transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;
@@ -440,8 +407,8 @@ body{
 .srv-card:active{transform:scale(.98);}
 .srv-card.active{
   border-color:#7C5CFC;
-  background:rgba(124,92,252,.08);
-  box-shadow:0 0 0 1px rgba(124,92,252,.2), 0 8px 24px rgba(124,92,252,.18);
+  background:rgba(124,92,252,.04);
+  box-shadow:0 0 0 1px rgba(124,92,252,.2), 0 8px 24px rgba(124,92,252,.12);
 }
 .srv-card.active::before{opacity:1;}
 
@@ -454,20 +421,21 @@ body{
 .srv-card-icon i{font-size:19px;color:#fff;}
 
 .srv-card-body{flex:1;}
-.srv-card-name{font-size:15px;font-weight:900;color:#fff;line-height:1.1;}
-.srv-card-desc{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);margin-top:3px;}
+.srv-card-name{font-size:15px;font-weight:900;color:#1e293b;line-height:1.1;} /* Dark Title */
+.srv-card-desc{font-size:11px;font-weight:600;color:#64748b;margin-top:3px;} /* Grey Description */
+
 .srv-tags{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
 .srv-tag{
   font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
   padding:3px 9px;border-radius:6px;
 }
-.srv-tag.ac{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.2);}
-.srv-tag.am{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.18);}
-.srv-tag.pr{background:rgba(124,92,252,.15);color:#a78bfa;border:1px solid rgba(124,92,252,.2);}
+.srv-tag.ac{background:rgba(34,197,94,.15);color:#16a34a;border:1px solid rgba(34,197,94,.2);}
+.srv-tag.am{background:rgba(251,191,36,.12);color:#d97706;border:1px solid rgba(251,191,36,.18);}
+.srv-tag.pr{background:rgba(124,92,252,.15);color:#7C5CFC;border:1px solid rgba(124,92,252,.2);}
 
 .srv-radio{
   width:24px;height:24px;border-radius:50%;flex-shrink:0;
-  border:2px solid rgba(255,255,255,.15);
+  border:2px solid #cbd5e1; /* Grey border for light theme */
   display:flex;align-items:center;justify-content:center;
   transition:background .2s,border-color .2s;
 }
@@ -475,16 +443,16 @@ body{
 .srv-radio i{font-size:10px;color:#fff;display:none;}
 .srv-card.active .srv-radio i{display:block;}
 
-/* Info note at bottom */
+/* Info note at bottom (Updated for White Theme) */
 .set-info{
   display:flex;align-items:flex-start;gap:10px;
   margin-top:14px;
-  background:rgba(124,92,252,.07);
+  background:rgba(124,92,252,.05);
   border:1px solid rgba(124,92,252,.15);
   border-radius:14px;padding:12px 14px;
 }
-.set-info-ic{font-size:14px;color:#a78bfa;flex-shrink:0;margin-top:1px;}
-.set-info-txt{font-size:11.5px;font-weight:600;color:rgba(255,255,255,.4);line-height:1.55;}
+.set-info-ic{font-size:14px;color:#7C5CFC;flex-shrink:0;margin-top:1px;}
+.set-info-txt{font-size:11.5px;font-weight:600;color:#475569;line-height:1.55;}
 </style>
 </head>
 <body>
@@ -583,13 +551,13 @@ body{
 <!-- Panel overlay -->
 <div class="panel-overlay" id="panelOverlay"></div>
 
-<!-- ════ HACK PANEL (UPDATED TO WHITE AND SIMPLE) ════ -->
+<!-- ════ HACK PANEL ════ -->
 <div class="slide-panel" id="hackPanel">
   <div class="panel-handle"></div>
 
-  <!-- Simple text header -->
+  <!-- Left Aligned Header -->
   <div class="panel-head">
-    <div class="hack-title-main">HACK</div>
+    <div class="panel-title-main">HACK</div>
   </div>
 
   <div class="pred-wrap">
@@ -617,16 +585,13 @@ body{
   </div>
 </div>
 
-<!-- ════ SETTINGS PANEL (REMAINS DARK) ════ -->
+<!-- ════ SETTINGS PANEL ════ -->
 <div class="slide-panel" id="settingPanel">
   <div class="panel-handle"></div>
 
+  <!-- Left Aligned Header -->
   <div class="panel-head">
-    <div class="panel-head-icon setting"><i class="fa-solid fa-gear"></i></div>
-    <div class="panel-head-text">
-      <div class="panel-head-title">Prediction Server</div>
-      <div class="panel-head-sub">Server choose karo · Active server ka prediction milega</div>
-    </div>
+    <div class="panel-title-main">SETTING</div>
   </div>
 
   <div class="set-wrap">
@@ -835,12 +800,6 @@ function applyServerUI(){
   const s = getServer();
   const isColor = s==="color";
   
-  // NOTE: Title in Hack Panel has been removed, so checking if it exists before editing text
-  const predTitle = document.getElementById("predServerName");
-  if(predTitle){
-      predTitle.textContent = isColor ? "NOVA X · Color Server" : "PRIME X · Size Server";
-  }
-
   const lbl = document.getElementById("predGameLabel");
   if(lbl) {
       lbl.textContent = (predGame==="trx"?"TRX":"Wingo") + " · " + (predTf||"--");
