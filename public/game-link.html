@@ -552,7 +552,7 @@ input:checked + .slider:before {
 #injectorWidget {
   position: fixed;
   top: 25%;
-  left: calc(50% - 120px); /* Centered perfectly for the compact 240px layout */
+  left: calc(50% - 90px); /* Centered perfectly for the compact 180px layout */
   z-index: 4000;
   cursor: grab;
   user-select: none;
@@ -564,12 +564,12 @@ input:checked + .slider:before {
 
 /* Floating Card Mode — Extremely compact and polished */
 .widget-card {
-  width: 240px; /* Reduced for ultra sleek styling */
+  width: 180px; /* Reduced to 180px for a much smaller size */
   background: #ffffff;
-  border-radius: 36px; /* Smooth rounded shape */
+  border-radius: 20px; /* Adjusted corner roundness for smaller card */
   border: 1.5px solid rgba(124, 92, 252, 0.08);
-  box-shadow: 0 16px 48px rgba(124, 92, 252, 0.18);
-  padding: 16px; /* Compact padding */
+  box-shadow: 0 12px 36px rgba(124, 92, 252, 0.18);
+  padding: 10px; /* Reduced padding */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -583,9 +583,9 @@ input:checked + .slider:before {
 .widget-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 /* Gentle Breathing Animation for circular logo */
@@ -605,10 +605,10 @@ input:checked + .slider:before {
 }
 
 .widget-logo {
-  width: 36px; /* Scaled down slightly */
-  height: 36px;
+  width: 24px; /* Reduced logo size */
+  height: 24px;
   border-radius: 50%;
-  border: 2px solid rgba(140, 82, 255, 0.4);
+  border: 1.5px solid rgba(140, 82, 255, 0.4);
   padding: 1px;
   background: #fff;
   object-fit: contain;
@@ -616,47 +616,47 @@ input:checked + .slider:before {
 }
 
 .widget-title {
-  font-size: 13px; /* Smaller fit for narrow width */
+  font-size: 10px; /* Smaller fit for narrow width */
   font-weight: 900; /* Extra bold */
   color: #4C2FA1;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   text-transform: uppercase; /* CAPITAL */
   font-family: 'Montserrat', sans-serif;
 }
 .widget-divider {
   width: 100%;
-  height: 1.5px;
+  height: 1px;
   background: #f1f1f6;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .widget-period-badge {
   width: 100%;
   background: #8249FF; /* Deep matching purple badge */
   color: #ffffff;
-  font-size: 10px;
+  font-size: 8px; /* Compact font size */
   font-weight: 800;
   text-align: center;
-  padding: 8px 12px;
+  padding: 5px 8px; /* Smaller padding */
   border-radius: 100px; /* Pill shaped */
-  letter-spacing: 0.6px;
-  box-shadow: 0 4px 12px rgba(130, 73, 255, 0.2);
-  margin-bottom: 12px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 3px 8px rgba(130, 73, 255, 0.2);
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 .widget-body {
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 .widget-pred-box {
   width: 100%;
-  height: 84px; /* Shorter for compact presentation */
+  height: 52px; /* Much shorter box height */
   background: #F5F6FC; /* Light gray box matches mockups */
-  border-radius: 24px;
+  border-radius: 14px; /* Scaled down border-radius */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 8px;
+  padding: 4px;
 }
 .widget-pred-img {
   max-width: 100%;
@@ -664,25 +664,25 @@ input:checked + .slider:before {
   object-fit: contain;
 }
 .widget-pred-wait {
-  font-size: 20px;
+  font-size: 14px; /* Smaller WAIT text */
   font-weight: 900;
   color: #a0aec0;
   letter-spacing: 1px;
 }
 .widget-footer {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
 }
 .widget-btn {
   flex: 1;
-  height: 38px; /* Slightly shorter */
-  border-radius: 20px; /* Highly rounded matching mockup */
+  height: 28px; /* Shorter compact height */
+  border-radius: 14px; /* Clean rounded shape */
   border: none;
   font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  font-size: 9px; /* Smaller text size */
   font-weight: 900;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   cursor: pointer;
   transition: transform 0.15s;
 }
@@ -701,12 +701,12 @@ input:checked + .slider:before {
 
 /* Minimized Spinning Ball Mode */
 .widget-ball {
-  width: 58px;
-  height: 58px;
+  width: 46px; /* Slightly scaled down from 58px */
+  height: 46px;
   background: #ffffff;
   border-radius: 50%;
-  border: 3px solid #7C5CFC;
-  box-shadow: 0 8px 24px rgba(124, 92, 252, 0.35);
+  border: 2.5px solid #7C5CFC;
+  box-shadow: 0 6px 18px rgba(124, 92, 252, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -714,8 +714,8 @@ input:checked + .slider:before {
   animation: widgetBallSpin 12s linear infinite, widgetPop .3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .widget-ball-logo {
-  width: 40px;
-  height: 40px;
+  width: 32px; /* Scaled down inner logo */
+  height: 32px;
   object-fit: contain;
   border-radius: 50%;
 }
@@ -1087,8 +1087,6 @@ function tickTimer(){
   valEl.textContent=str;
 
   // Real-time synchronization check:
-  // When timer goes from 1s to maximum _tfSecs (meaning previous round ended and new round starts),
-  // wait exactly 1 second, then run a fresh api request.
   if (lastRem === 1 && rem === _tfSecs) {
     setTimeout(() => {
       loadPrediction();
@@ -1228,6 +1226,38 @@ function renderPredCard(d){
         </div>
       </div>
     </div>`;
+}
+
+async function loadPrediction(){
+  const a=auth(); if(!a) return;
+  const srv=getServer();
+  try{
+    const d=await withRefresh(()=>apiFetch("/api/get-prediction",{uid:a.uid,session_signature:a.session_signature,game:predGame,timeframe:predTf,server:srv}));
+    if(d.status==="error"){
+      const b=document.getElementById("predBody");
+      if(b) b.innerHTML=`<div class="pred-msg-box"><i class="fa-solid fa-triangle-exclamation pred-msg-ic" style="color:#ef4444"></i><span class="pred-msg-txt">${d.message||"Prediction load nahi ho saki"}</span></div>`;
+      updateFloatingWidget({prediction:"WAIT",period:"—"});
+      stopTimerTick();
+      return;
+    }
+    const html=renderPredCard(d);
+    const b=document.getElementById("predBody");
+    if(b) b.innerHTML=html;
+    updateFloatingWidget(d);
+    startTimerTick();
+  }catch(e){
+    const b=document.getElementById("predBody");
+    if(b) b.innerHTML=`<div class="pred-msg-box"><i class="fa-solid fa-circle-exclamation pred-msg-ic"></i><span class="pred-msg-txt">Network error. Reloading...</span></div>`;
+    updateFloatingWidget({prediction:"WAIT",period:"—"});
+    stopTimerTick();
+  }
+}
+
+function applyServerUI(){
+  const s=getServer();
+  document.querySelectorAll(".server-select-btn").forEach(el=>{
+    el.classList.toggle("active", el.dataset.srv===s);
+  });
 }
 
 /* ── Smart Background Polling Manager ── */
